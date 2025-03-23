@@ -33,7 +33,9 @@ interface CreateSetting<T> {
 	resetToFallback: (raw?: T) => void;
 };
 
-export function createSetting<T>(initial: T | undefined | null, fallback?: T): CreateSetting<T> {
+export function createGameSetting<T>(name: string, initial: T | undefined | null, fallback?: T): CreateSetting<T> {
+	const { settingsToSave, setSettingsToSave } = useSettings();
+
 	const [value, setValue] = createSignal<T>((initial === undefined || initial === null) ? fallback as T : initial);
 	const [raw, setRaw] = createSignal<T>(initial as T);
 	const [isGlobal, setIsGlobal] = createSignal<boolean | null>(true);
@@ -57,6 +59,11 @@ export function createSetting<T>(initial: T | undefined | null, fallback?: T): C
 		setRaw(newValue!);
 		setValue(newValue!);
 		checkGlobal();
+
+		setSettingsToSave({
+			...settingsToSave(),
+			[name]: newValue,
+		});
 
 		return value as any;
 	};
@@ -380,49 +387,26 @@ export function JvmSettings(props: {
 }
 
 function PageSettings() {
-	const { settings, saveOnLeave } = useSettings();
+	const { settings } = useSettings();
 
 	// Game
-	const fullscreen = createSetting(settings().force_fullscreen ?? false);
-	const resolution = createSetting(settings().resolution);
-	const memory = createSetting(settings().memory);
+	const fullscreen = createGameSetting("force_fullscreen", settings().force_fullscreen ?? false);
+	const resolution = createGameSetting("resolution", settings().resolution);
+	const memory = createGameSetting("memory", settings().memory);
 
 	// Launcher
-	const hideOnLaunch = createSetting(settings().hide_on_launch ?? false);
-	const allowParallelClusters = createSetting(settings().allow_parallel_running_clusters ?? false);
+	const hideOnLaunch = createGameSetting("hide_on_launch", settings().hide_on_launch ?? false);
+	const allowParallelClusters = createGameSetting("allow_parallel_running_clusters", settings().allow_parallel_running_clusters ?? false);
 
 	// Process
-	const preCommand = createSetting(settings().init_hooks.pre ?? '');
-	const wrapperCommand = createSetting(settings().init_hooks.wrapper ?? '');
-	const postCommand = createSetting(settings().init_hooks.post ?? '');
+	const preCommand = createGameSetting("", settings().init_hooks.pre ?? '');
+	const wrapperCommand = createGameSetting(settings().init_hooks.wrapper ?? '');
+	const postCommand = createGameSetting(settings().init_hooks.post ?? '');
 
 	// JVM
-	const javaVersions = createSetting(settings().java_versions);
-	const javaArgs = createSetting(settings().custom_java_args);
-	const envVars = createSetting(settings().custom_env_args);
-
-	saveOnLeave(() => ({
-		// Game
-		force_fullscreen: fullscreen.get(),
-		resolution: resolution.get(),
-		memory: memory.get(),
-
-		// Launcher
-		hide_on_launch: hideOnLaunch.get(),
-		allow_parallel_running_clusters: allowParallelClusters.get(),
-
-		// Process
-		init_hooks: {
-			pre: preCommand.get(),
-			wrapper: wrapperCommand.get(),
-			post: postCommand.get(),
-		},
-
-		// JVM
-		java_versions: javaVersions.get(),
-		custom_java_args: javaArgs.get(),
-		custom_env_args: envVars.get(),
-	}));
+	const javaVersions = createGameSetting(settings().java_versions);
+	const javaArgs = createGameSetting(settings().custom_java_args);
+	const envVars = createGameSetting(settings().custom_env_args);
 
 	return (
 		<>

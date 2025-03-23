@@ -14,9 +14,13 @@ import { createEffect, createSignal, For } from 'solid-js';
 import SettingsRow from '../../../components/SettingsRow';
 
 function SettingsAppearance() {
-	const { settings, saveOnLeave } = useSettings();
+	const { settings, createSetting } = useSettings();
 	const [shouldReload, setShouldReload] = createSignal(false);
-	const [theme, setTheme] = createSignal(settings().theme ?? DEFAULT_THEME);
+
+	const [browserListView, setBrowserListView] = createSetting('browser_list_view', settings().browser_list_view ?? 'grid');
+	const [disableAnimations, setDisableAnimations] = createSetting('disable_animations', settings().disable_animations ?? false);
+	const [customFrame, setCustomFrame] = createSetting('custom_frame', settings().custom_frame ?? true);
+	const [theme, setTheme] = createSetting('theme', settings().theme ?? DEFAULT_THEME);
 
 	createEffect(() => {
 		document.body.classList.add('theme-transition');
@@ -36,12 +40,11 @@ function SettingsAppearance() {
 			bridge.commands.setWindowStyle(settings().custom_frame!);
 	});
 
-	// eslint-disable-next-line solid/reactivity -- This is a side effect
-	saveOnLeave(() => ({
-		disable_animations: settings().disable_animations!,
-		custom_frame: settings().custom_frame!,
-		theme: theme(),
-	}));
+	// setSettingsToSave(() => ({
+	// 	disable_animations: settings().disable_animations!,
+	// 	custom_frame: settings().custom_frame!,
+	// 	theme: theme(),
+	// }));
 
 	return (
 		<Sidebar.Page>
@@ -79,8 +82,8 @@ function SettingsAppearance() {
 					title="Package List Style"
 				>
 					<Dropdown
-						onChange={value => settings().browser_list_view = BROWSER_VIEWS[value] ?? 'grid'}
-						selected={() => BROWSER_VIEWS.indexOf(settings().browser_list_view ?? 'grid')}
+						onChange={value => setBrowserListView(BROWSER_VIEWS[value] ?? 'grid')}
+						selected={() => BROWSER_VIEWS.indexOf(browserListView())}
 					>
 						<For each={BROWSER_VIEWS}>
 							{view => (
@@ -96,9 +99,9 @@ function SettingsAppearance() {
 					title="Custom Window Frame"
 				>
 					<Toggle
-						checked={() => settings().custom_frame ?? true}
+						checked={customFrame}
 						onChecked={(value) => {
-							settings().custom_frame = value;
+							setCustomFrame(value);
 							Window.getCurrent().setDecorations(value);
 							// setShouldReload(true);
 						}}
@@ -111,9 +114,9 @@ function SettingsAppearance() {
 					title="Disable Animations"
 				>
 					<Toggle
-						checked={() => settings().disable_animations ?? false}
+						checked={disableAnimations}
 						onChecked={(value) => {
-							settings().disable_animations = value;
+							setDisableAnimations(value);
 							setShouldReload(true);
 						}}
 					/>

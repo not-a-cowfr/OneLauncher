@@ -12,15 +12,18 @@ import { createSignal } from 'solid-js';
 
 function SettingsDeveloper() {
 	const notifications = useNotifications();
-	const { settings, saveOnLeave } = useSettings();
+	const { settings, createSetting, saveChangedSettings } = useSettings();
 	const navigate = useNavigate();
 
 	const [notiCounter, setNotiCounter] = createSignal(0);
 
-	saveOnLeave(() => ({
-		debug_mode: settings().debug_mode!,
-		onboarding_completed: settings().onboarding_completed!,
-	}));
+	const [debugMode, setDebugMode] = createSetting('debug_mode', settings().debug_mode ?? false);
+	const [_onboardingComplete, setOnboardingComplete] = createSetting('onboarding_completed', settings().onboarding_completed);
+
+	// saveOnLeave(() => ({
+	// 	debug_mode: settings().debug_mode!,
+	// 	onboarding_completed: settings().onboarding_completed!,
+	// }));
 
 	function createTestNotification() {
 		notifications.set(`test_notification${notiCounter()}`, {
@@ -58,8 +61,8 @@ function SettingsDeveloper() {
 					title="Debug mode"
 				>
 					<Toggle
-						checked={() => settings().debug_mode ?? false}
-						onChecked={value => settings().debug_mode = value}
+						checked={debugMode}
+						onChecked={setDebugMode}
 					/>
 				</SettingsRow>
 
@@ -84,8 +87,10 @@ function SettingsDeveloper() {
 						children="Open"
 						iconLeft={<EyeIcon />}
 						onClick={() => {
-							settings().onboarding_completed = false;
-							navigate('/onboarding');
+							setOnboardingComplete(false);
+							saveChangedSettings().finally(() => {
+								navigate('/onboarding');
+							});
 						}}
 					/>
 				</SettingsRow>

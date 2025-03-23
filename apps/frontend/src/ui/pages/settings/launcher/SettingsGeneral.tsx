@@ -9,13 +9,11 @@ import useSettings from '~ui/hooks/useSettings';
 import SettingsRow from '../../../components/SettingsRow';
 
 function SettingsGeneral() {
-	const { settings, saveOnLeave } = useSettings();
+	const { settings, createSetting } = useSettings();
 
-	saveOnLeave(() => ({
-		disable_discord: settings().disable_discord!,
-		hide_close_prompt: settings().hide_close_prompt!,
-		disable_analytics: settings().disable_analytics!,
-	}));
+	const [disableDiscord, setDisableDiscord] = createSetting('disable_discord', settings().disable_discord ?? false);
+	const [hideClosePrompt, setHideClosePrompt] = createSetting('hide_close_prompt', settings().hide_close_prompt ?? true);
+	// const [disableAnalytics, setDisableAnalytics] = createSetting("disable_analytics", settings().disable_analytics ?? false);
 
 	return (
 		<Sidebar.Page>
@@ -28,19 +26,19 @@ function SettingsGeneral() {
 					title="Discord RPC"
 				>
 					<Toggle
-						checked={() => !(settings().disable_discord ?? false)}
-						onChecked={value => settings().disable_discord = !value}
+						checked={() => !disableDiscord()}
+						onChecked={value => setDisableDiscord(!value)}
 					/>
 				</SettingsRow>
 
 				<SettingsRow
-					description="Hide the confirmation dialog when closing the launcher."
+					description="Enable the confirmation dialog when closing the launcher."
 					icon={<XIcon />}
-					title="Hide Close Dialog"
+					title="Enable Close Dialog"
 				>
 					<Toggle
-						checked={() => settings().hide_close_prompt ?? true}
-						onChecked={value => settings().hide_close_prompt = value}
+						checked={() => !hideClosePrompt()}
+						onChecked={value => setHideClosePrompt(!value)}
 					/>
 				</SettingsRow>
 

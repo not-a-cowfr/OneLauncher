@@ -7,7 +7,7 @@ import useClusterContext from '~ui/hooks/useCluster';
 import { tryResult } from '~ui/hooks/useCommand';
 import useSettings from '~ui/hooks/useSettings';
 import { type Accessor, Show } from 'solid-js';
-import { createSetting, GameSettings, JvmSettings, LauncherSettings, ProcessSettings } from '../settings/game/SettingsMinecraft';
+import { createGameSetting, GameSettings, JvmSettings, LauncherSettings, ProcessSettings } from '../settings/game/SettingsMinecraft';
 
 function ClusterSettings() {
 	const [cluster] = useClusterContext();
@@ -28,22 +28,22 @@ function PageSettings(cluster: Accessor<Cluster>) {
 	const { settings, save } = useSettings();
 
 	// Game
-	const fullscreen = createSetting(cluster().force_fullscreen, settings().force_fullscreen ?? false);
-	const resolution = createSetting(cluster().resolution, settings().resolution);
-	const memory = createSetting(cluster().memory, settings().memory);
+	const fullscreen = createGameSetting(cluster().force_fullscreen, settings().force_fullscreen ?? false);
+	const resolution = createGameSetting(cluster().resolution, settings().resolution);
+	const memory = createGameSetting(cluster().memory, settings().memory);
 
 	// Launcher
 
 	// Process
-	const preCommand = createSetting(cluster().init_hooks?.pre, settings().init_hooks.pre ?? '');
-	const wrapperCommand = createSetting(cluster().init_hooks?.wrapper, settings().init_hooks.wrapper ?? '');
-	const postCommand = createSetting(cluster().init_hooks?.post, settings().init_hooks.post ?? '');
+	const preCommand = createGameSetting(cluster().init_hooks?.pre, settings().init_hooks.pre ?? '');
+	const wrapperCommand = createGameSetting(cluster().init_hooks?.wrapper, settings().init_hooks.wrapper ?? '');
+	const postCommand = createGameSetting(cluster().init_hooks?.post, settings().init_hooks.post ?? '');
 
 	// JVM
-	const javaVersion = createSetting<bridge.JavaVersion | null>(cluster().java?.custom_version || null);
-	const javaVersions = createSetting(settings().java_versions);
-	const javaArgs = createSetting(cluster().java?.custom_arguments, settings().custom_java_args);
-	const envVars = createSetting(cluster().java?.custom_env_arguments, settings().custom_env_args);
+	const javaVersion = createGameSetting<bridge.JavaVersion | null>(cluster().java?.custom_version || null);
+	const javaVersions = createGameSetting(settings().java_versions);
+	const javaArgs = createGameSetting(cluster().java?.custom_arguments, settings().custom_java_args);
+	const envVars = createGameSetting(cluster().java?.custom_env_arguments, settings().custom_env_args);
 
 	useBeforeLeave(() => {
 		tryResult(() => bridge.commands.editGameSettings(cluster().uuid, {
