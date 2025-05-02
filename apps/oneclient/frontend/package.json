@@ -3,8 +3,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev": "vite --port 3000",
-		"start": "vite --port 3000",
+		"dev": "vite --port 8002",
+		"start": "vite --port 8002",
 		"build": "vite build && tsc",
 		"serve": "vite preview",
 		"lint": "eslint",
