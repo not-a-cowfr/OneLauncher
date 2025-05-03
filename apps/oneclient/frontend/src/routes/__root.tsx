@@ -5,6 +5,7 @@ import TanstackQueryLayout from '../integrations/tanstack-query/layout'
 
 import type { QueryClient } from '@tanstack/react-query'
 import WindowFrame from '@/components/WindowFrame'
+import background from "@/assets/background.png"
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -17,8 +18,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
           // TODO: change to something else
-          backgroundImage: 'url(https://github.com/emirsassan.png)',
-          filter: 'brightness(0.7)'
+          backgroundImage: `url(${background})`,
+          filter: 'brightness(0.7)',
+          boxShadow: 'inset 0 0 100px rgba(0, 0, 0, 0.5)',
         }}
       />
       <WindowFrame />

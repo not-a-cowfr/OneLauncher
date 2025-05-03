@@ -1,32 +1,134 @@
 @import "tailwindcss";
 
 body {
-  @apply m-0 text-fg-primary font-sans;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	@apply m-0 text-fg-primary;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-html, body, :root {
+html,
+body,
+:root {
 	@apply bg-page;
 }
 
+html:active-view-transition-type(slide-left) {
+	&::view-transition-old(main-content) {
+		animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-out-left;
+	}
+
+	&::view-transition-new(main-content) {
+		animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-in-left;
+	}
+}
+
+@keyframes slide-out-left {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes slide-in-left {
+	from {
+		transform: translateX(100%);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+}
+
+/* Slide Right Transition */
+html:active-view-transition-type(slide-right) {
+	&::view-transition-old(main-content) {
+		animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-out-right;
+	}
+
+	&::view-transition-new(main-content) {
+		animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-in-right;
+	}
+}
+
+@keyframes slide-out-right {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes slide-in-right {
+	from {
+		transform: translateX(-100%);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+}
+
+/* Warp/Rotate Transition */
+html:active-view-transition-type(warp) {
+	&::view-transition-old(post) {
+		animation: 400ms ease-out both warp-out;
+	}
+
+	&::view-transition-new(post) {
+		animation: 400ms ease-out both warp-in;
+	}
+}
+
+@keyframes warp-out {
+	from {
+		opacity: 1;
+		filter: blur(0) brightness(1);
+		transform: scale(1) rotate(0deg);
+	}
+
+	to {
+		opacity: 0;
+		filter: blur(15px) brightness(1.8);
+		transform: scale(1.1) rotate(90deg);
+	}
+}
+
+@keyframes warp-in {
+	from {
+		opacity: 0;
+		filter: blur(15px) brightness(1.8);
+		transform: scale(0.9) rotate(-45deg);
+	}
+
+	to {
+		opacity: 1;
+		filter: blur(0) brightness(1);
+		transform: scale(1) rotate(0deg);
+	}
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 
 :root {
-  	--clr-border: rgb(40, 40, 40);
+	--clr-border: rgb(40, 40, 40);
 
 	--clr-fg-primary: rgb(40, 40, 40);
 	--clr-fg-primary-hover: rgb(30, 30, 30);
 	--clr-fg-primary-pressed: rgb(20, 20, 20);
 	--clr-fg-primary-disabled: rgba(40, 40, 40, 0.5);
 
-  	--clr-fg-secondary: rgb(80, 80, 80);
+	--clr-fg-secondary: rgb(80, 80, 80);
 	--clr-fg-secondary-hover: rgb(60, 60, 60);
 	--clr-fg-secondary-pressed: rgb(100, 100, 100);
 	--clr-fg-secondary-disabled: rgba(80, 80, 80, 0.5);
@@ -67,7 +169,7 @@ code {
 	--clr-link-pressed: rgb(20, 80, 160);
 	--clr-link-disabled: rgba(40, 120, 200, 0.5);
 
-  	--clr-page: rgb(255, 255, 255);
+	--clr-page: rgb(255, 255, 255);
 	--clr-page-elevated: rgb(245, 245, 245);
 	--clr-page-pressed: rgb(230, 230, 230);
 
@@ -82,7 +184,7 @@ code {
 	--clr-fg-primary-pressed: rgb(225, 229, 255);
 	--clr-fg-primary-disabled: rgb(205, 209, 235);
 
-  	--clr-fg-secondary: rgb(120, 129, 141);
+	--clr-fg-secondary: rgb(120, 129, 141);
 	--clr-fg-secondary-hover: rgb(95, 104, 116);
 	--clr-fg-secondary-pressed: rgb(130, 141, 155);
 	--clr-fg-secondary-disabled: rgb(100, 109, 121);
@@ -123,7 +225,7 @@ code {
 	--clr-link-pressed: rgb(114, 175, 255);
 	--clr-link-disabled: rgba(97, 175, 239, 0.5);
 
-  	--clr-page: rgb(17, 23, 28);
+	--clr-page: rgb(17, 23, 28);
 	--clr-page-elevated: rgb(21, 28, 34);
 	--clr-page-pressed: rgb(14, 19, 23);
 
@@ -131,27 +233,27 @@ code {
 }
 
 @theme inline {
-  	--color-border: var(--clr-border);
+	--color-border: var(--clr-border);
 	--color-fg-primary: var(--clr-fg-primary);
 	--color-fg-primary-hover: var(--clr-fg-primary-hover);
 	--color-fg-primary-pressed: var(--clr-fg-primary-pressed);
 
-  	--color-fg-secondary: var(--clr-fg-secondary);
+	--color-fg-secondary: var(--clr-fg-secondary);
 	--color-fg-secondary-hover: var(--clr-fg-secondary-hover);
 	--color-fg-secondary-pressed: var(--clr-fg-secondary-pressed);
 	--color-fg-secondary-disabled: var(--clr-fg-secondary-disabled);
 
-  	--color-brand: var(--clr-brand);
+	--color-brand: var(--clr-brand);
 	--color-brand-hover: var(--clr-brand-hover);
 	--color-brand-pressed: var(--clr-brand-pressed);
 	--color-brand-disabled: var(--clr-brand-disabled);
 
-  	--color-onbrand: var(--clr-onbrand);
+	--color-onbrand: var(--clr-onbrand);
 	--color-onbrand-hover: var(--clr-onbrand-hover);
 	--color-onbrand-pressed: var(--clr-onbrand-pressed);
 	--color-onbrand-disabled: var(--clr-onbrand-disabled);
 
-  	--color-danger: var(--clr-danger);
+	--color-danger: var(--clr-danger);
 	--color-danger-hover: var(--clr-danger-hover);
 	--color-danger-pressed: var(--clr-danger-pressed);
 	--color-danger-disabled: var(--clr-danger-disabled);
@@ -180,6 +282,6 @@ code {
 	--color-page: var(--clr-page);
 	--color-page-elevated: var(--clr-page-elevated);
 	--color-page-pressed: var(--clr-page-pressed);
-  
+
 	--color-secondary: var(--clr-secondary);
 }

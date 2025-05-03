@@ -1,4 +1,6 @@
-import { Maximize02Icon, MinusIcon, XCloseIcon } from '@untitled-theme/icons-react';
+import { Maximize02Icon, MinusIcon, Settings01Icon, XCloseIcon } from '@untitled-theme/icons-react';
+import PolyfrostLogo from "@/assets/polyfrost.svg";
+import { Link } from '@tanstack/react-router';
 
 interface TitlebarButtonProps {
 	icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -17,24 +19,37 @@ function TitlebarButton(props: TitlebarButtonProps) {
 }
 
 export default function WindowFrame() {
-    const handleMinimize = () => console.log('Minimize window');
-    const handleMaximize = () => console.log('Maximize window');
-    const handleClose = () => console.log('Close window');
-    
-    return (
-        <div className="z-[3169] absolute top-0 left-0 right-0">
-            <div className="h-8 w-full flex flex-row items-center justify-between gap-0.5 p-10" data-tauri-drag-region>
-                <div className="flex flex-row items-center">
-					{/* TODO: change this too */}
-                    <p className='select-none pl-3 text-white/70'>OneClient</p>
-                </div>
+	const handleMinimize = () => console.log('Minimize window');
+	const handleMaximize = () => console.log('Maximize window');
+	const handleClose = () => console.log('Close window');
 
-                <div className="flex flex-row items-center justify-end gap-2">
-                    <TitlebarButton icon={MinusIcon} onClick={handleMinimize} />
-                    <TitlebarButton icon={Maximize02Icon} onClick={handleMaximize} />
-                    <TitlebarButton danger icon={XCloseIcon} onClick={handleClose} />
-                </div>
-            </div>
-        </div>
-    )
+	return (
+		<div className="z-[3169] absolute top-0 left-0 right-0 select-none">
+			<div className="h-8 w-full flex flex-row items-center justify-between gap-0.5 p-10" data-tauri-drag-region>
+				<div className="flex flex-row items-center select-none">
+					{/* TODO: change this too */}
+					<img src={PolyfrostLogo} />
+				</div>
+
+				<div className='flex flex-row items-center gap-8'>
+					<Link to="/">
+						<p className='text-white/80'>Home</p>
+					</Link>
+
+					<Link to="/settings">
+						<p className='text-white/80'>Settings</p>
+					</Link>
+					<p className='text-white/80'>Friends?</p>
+				</div>
+
+				<div className="flex flex-row items-center justify-end gap-2">
+					<TitlebarButton icon={Settings01Icon} />
+
+					<TitlebarButton icon={MinusIcon} onClick={handleMinimize} />
+					<TitlebarButton icon={Maximize02Icon} onClick={handleMaximize} />
+					<TitlebarButton danger icon={XCloseIcon} onClick={handleClose} />
+				</div>
+			</div>
+		</div>
+	)
 }
