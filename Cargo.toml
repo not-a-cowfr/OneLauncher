@@ -1,6 +1,7 @@
 [workspace]
 members = [
 	"apps/onelauncher/desktop",
+	"apps/oneclient/desktop",
 	"packages/core",
 	"packages/entity",
 	"packages/gamemode",

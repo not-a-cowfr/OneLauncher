@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body {
-  @apply m-0;
+  @apply m-0 text-fg-primary font-sans;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -9,7 +9,177 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body, :root {
+	@apply bg-page;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  	--clr-border: rgb(40, 40, 40);
+
+	--clr-fg-primary: rgb(40, 40, 40);
+	--clr-fg-primary-hover: rgb(30, 30, 30);
+	--clr-fg-primary-pressed: rgb(20, 20, 20);
+	--clr-fg-primary-disabled: rgba(40, 40, 40, 0.5);
+
+  	--clr-fg-secondary: rgb(80, 80, 80);
+	--clr-fg-secondary-hover: rgb(60, 60, 60);
+	--clr-fg-secondary-pressed: rgb(100, 100, 100);
+	--clr-fg-secondary-disabled: rgba(80, 80, 80, 0.5);
+
+	--clr-brand: rgb(43, 75, 255);
+	--clr-brand-hover: rgb(35, 60, 200);
+	--clr-brand-pressed: rgb(30, 50, 170);
+	--clr-brand-disabled: rgba(43, 75, 255, 0.5);
+
+	--clr-onbrand: rgb(255, 255, 255);
+	--clr-onbrand-hover: rgb(245, 245, 245);
+	--clr-onbrand-pressed: rgb(230, 230, 230);
+	--clr-onbrand-disabled: rgba(230, 230, 230, 0.5);
+
+	--clr-danger: rgb(200, 50, 50);
+	--clr-danger-hover: rgb(180, 40, 40);
+	--clr-danger-pressed: rgb(220, 60, 60);
+	--clr-danger-disabled: rgba(200, 50, 50, 0.5);
+
+	--clr-success: rgb(50, 160, 100);
+	--clr-success-hover: rgb(40, 140, 90);
+	--clr-success-pressed: rgb(60, 180, 110);
+	--clr-success-disabled: rgba(50, 160, 100, 0.5);
+
+	--clr-component-bg: rgb(240, 240, 240);
+	--clr-component-bg-hover: rgb(230, 230, 230);
+	--clr-component-bg-pressed: rgb(220, 220, 220);
+	--clr-component-bg-disabled: rgba(240, 240, 240, 0.5);
+
+	--clr-code-info: rgb(40, 120, 200);
+	--clr-code-warn: rgb(200, 150, 90);
+	--clr-code-error: rgb(180, 70, 60);
+	--clr-code-debug: rgb(40, 70, 200);
+	--clr-code-trace: rgb(40, 40, 40);
+
+	--clr-link: rgb(40, 120, 200);
+	--clr-link-hover: rgb(30, 100, 180);
+	--clr-link-pressed: rgb(20, 80, 160);
+	--clr-link-disabled: rgba(40, 120, 200, 0.5);
+
+  	--clr-page: rgb(255, 255, 255);
+	--clr-page-elevated: rgb(245, 245, 245);
+	--clr-page-pressed: rgb(230, 230, 230);
+
+	--clr-secondary: rgb(220, 220, 220);
+}
+
+[data-theme="dark"] {
+	--clr-border: rgb(255, 255, 255);
+
+	--clr-fg-primary: rgb(213, 219, 255);
+	--clr-fg-primary-hover: rgb(218, 224, 255);
+	--clr-fg-primary-pressed: rgb(225, 229, 255);
+	--clr-fg-primary-disabled: rgb(205, 209, 235);
+
+  	--clr-fg-secondary: rgb(120, 129, 141);
+	--clr-fg-secondary-hover: rgb(95, 104, 116);
+	--clr-fg-secondary-pressed: rgb(130, 141, 155);
+	--clr-fg-secondary-disabled: rgb(100, 109, 121);
+
+	--clr-brand: rgb(43, 75, 255);
+	--clr-brand-hover: rgb(40, 67, 221);
+	--clr-brand-pressed: rgb(57, 87, 255);
+	--clr-brand-disabled: rgb(37, 67, 235);
+
+	--clr-onbrand: rgb(213, 219, 255);
+	--clr-onbrand-hover: rgb(218, 224, 255);
+	--clr-onbrand-pressed: rgb(225, 229, 255);
+	--clr-onbrand-disabled: rgb(205, 209, 235);
+
+	--clr-danger: rgb(255, 68, 68);
+	--clr-danger-hover: rgb(214, 52, 52);
+	--clr-danger-pressed: rgb(255, 86, 86);
+	--clr-danger-disabled: rgb(235, 48, 48);
+
+	--clr-success: rgb(35, 154, 96);
+	--clr-success-hover: rgb(26, 135, 82);
+	--clr-success-pressed: rgb(44, 172, 110);
+	--clr-success-disabled: rgb(15, 134, 76);
+
+	--clr-component-bg: rgb(26, 34, 41);
+	--clr-component-bg-hover: rgb(23, 31, 37);
+	--clr-component-bg-pressed: rgb(34, 44, 53);
+	--clr-component-bg-disabled: rgb(16, 24, 31);
+
+	--clr-code-info: rgb(97, 175, 239);
+	--clr-code-warn: rgb(229, 192, 123);
+	--clr-code-error: rgb(190, 80, 70);
+	--clr-code-debug: rgb(43, 75, 255);
+	--clr-code-trace: rgb(253, 253, 253);
+
+	--clr-link: rgb(97, 175, 239);
+	--clr-link-hover: rgb(95, 135, 255);
+	--clr-link-pressed: rgb(114, 175, 255);
+	--clr-link-disabled: rgba(97, 175, 239, 0.5);
+
+  	--clr-page: rgb(17, 23, 28);
+	--clr-page-elevated: rgb(21, 28, 34);
+	--clr-page-pressed: rgb(14, 19, 23);
+
+	--clr-secondary: rgb(25, 32, 38);
+}
+
+@theme inline {
+  	--color-border: var(--clr-border);
+	--color-fg-primary: var(--clr-fg-primary);
+	--color-fg-primary-hover: var(--clr-fg-primary-hover);
+	--color-fg-primary-pressed: var(--clr-fg-primary-pressed);
+
+  	--color-fg-secondary: var(--clr-fg-secondary);
+	--color-fg-secondary-hover: var(--clr-fg-secondary-hover);
+	--color-fg-secondary-pressed: var(--clr-fg-secondary-pressed);
+	--color-fg-secondary-disabled: var(--clr-fg-secondary-disabled);
+
+  	--color-brand: var(--clr-brand);
+	--color-brand-hover: var(--clr-brand-hover);
+	--color-brand-pressed: var(--clr-brand-pressed);
+	--color-brand-disabled: var(--clr-brand-disabled);
+
+  	--color-onbrand: var(--clr-onbrand);
+	--color-onbrand-hover: var(--clr-onbrand-hover);
+	--color-onbrand-pressed: var(--clr-onbrand-pressed);
+	--color-onbrand-disabled: var(--clr-onbrand-disabled);
+
+  	--color-danger: var(--clr-danger);
+	--color-danger-hover: var(--clr-danger-hover);
+	--color-danger-pressed: var(--clr-danger-pressed);
+	--color-danger-disabled: var(--clr-danger-disabled);
+
+	--color-success: var(--clr-success);
+	--color-success-hover: var(--clr-success-hover);
+	--color-success-pressed: var(--clr-success-pressed);
+	--color-success-disabled: var(--clr-success-disabled);
+
+	--color-component-bg: var(--clr-component-bg);
+	--color-component-bg-hover: var(--clr-component-bg-hover);
+	--color-component-bg-pressed: var(--clr-component-bg-pressed);
+	--color-component-bg-disabled: var(--clr-component-bg-disabled);
+
+	--color-code-info: var(--clr-code-info);
+	--color-code-warn: var(--clr-code-warn);
+	--color-code-error: var(--clr-code-error);
+	--color-code-debug: var(--clr-code-debug);
+	--color-code-trace: var(--clr-code-trace);
+
+	--color-link: var(--clr-link);
+	--color-link-hover: var(--clr-link-hover);
+	--color-link-pressed: var(--clr-link-pressed);
+	--color-link-disabled: var(--clr-link-disabled);
+
+	--color-page: var(--clr-page);
+	--color-page-elevated: var(--clr-page-elevated);
+	--color-page-pressed: var(--clr-page-pressed);
+  
+	--color-secondary: var(--clr-secondary);
 }

@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
+import { ChevronSelectorVerticalIcon } from '@untitled-theme/icons-react'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -7,33 +7,28 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <div className="text-center">
-      <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
-        <img
-          src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-          alt="logo"
-        />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="flex-1 flex flex-col justify-center px-16 z-10 relative">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-6xl font-bold text-white">SKYBLOCK</h1>
+          <p className="text-xl text-white/80 mb-4">1.21.4 Forge</p>
+
+          <div className="flex items-center gap-4">
+            <button className="bg-[#455ef8] text-white px-20 py-2 rounded-lg flex flex-col items-center justify-center transition-colors hover:bg-brand-hover active:bg-brand-pressed">
+              <span className='text-xl font-extrabold'>LAUNCH</span>
+              <span className='text-xs'>Forge 1.8.9</span>
+            </button>
+
+            <button className="text-base px-3 hover:bg-fg-secondary-hover/20 py-3 hover:cursor-pointer rounded-md transition-colors">
+              <span className="text-lg"><ChevronSelectorVerticalIcon /></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className='z-50 bg-secondary w-full h-[127px]'>
+        <p>still a demo layout not a final design</p>
+      </div>
+    </>
   )
 }
