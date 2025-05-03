@@ -1,4 +1,4 @@
-import { Maximize02Icon, MinusIcon, Settings01Icon, XCloseIcon } from '@untitled-theme/icons-react';
+import { Maximize02Icon, MinusIcon, XCloseIcon } from '@untitled-theme/icons-react';
 import PolyfrostLogo from "@/assets/polyfrost.svg";
 import { Link } from '@tanstack/react-router';
 
@@ -27,8 +27,7 @@ export default function WindowFrame() {
 		<div className="z-[3169] absolute top-0 left-0 right-0 select-none">
 			<div className="h-8 w-full flex flex-row items-center justify-between gap-0.5 p-10" data-tauri-drag-region>
 				<div className="flex flex-row items-center select-none">
-					{/* TODO: change this too */}
-					<img src={PolyfrostLogo} />
+					<img src={PolyfrostLogo} className='w-38' />
 				</div>
 
 				<div className='flex flex-row items-center gap-8'>
@@ -43,8 +42,10 @@ export default function WindowFrame() {
 				</div>
 
 				<div className="flex flex-row items-center justify-end gap-2">
-					<TitlebarButton icon={Settings01Icon} />
-
+					{/* i know this is a dumb way to center the logo when view transition happens
+						but i dont want to fix this so for now it'll be like this
+						if anyone wants to fix this do it */}
+					<div className='size-[20px] w-8' />
 					<TitlebarButton icon={MinusIcon} onClick={handleMinimize} />
 					<TitlebarButton icon={Maximize02Icon} onClick={handleMaximize} />
 					<TitlebarButton danger icon={XCloseIcon} onClick={handleClose} />
