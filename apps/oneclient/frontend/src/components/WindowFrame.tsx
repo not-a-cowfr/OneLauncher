@@ -1,6 +1,7 @@
 import { Maximize02Icon, MinusIcon, XCloseIcon } from '@untitled-theme/icons-react';
 import PolyfrostLogo from "@/assets/polyfrost.svg";
 import { Link } from '@tanstack/react-router';
+import { Window } from "@tauri-apps/api/window"
 
 interface TitlebarButtonProps {
 	icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -18,11 +19,11 @@ function TitlebarButton(props: TitlebarButtonProps) {
 	);
 }
 
-export default function WindowFrame() {
-	const handleMinimize = () => console.log('Minimize window');
-	const handleMaximize = () => console.log('Maximize window');
-	const handleClose = () => console.log('Close window');
+const handleMinimize = () => Window.getCurrent().minimize();
+const handleMaximize = () => Window.getCurrent().toggleMaximize();;
+const handleClose = () => Window.getCurrent().close();
 
+export default function WindowFrame() {
 	return (
 		<div className="z-[3169] absolute top-0 left-0 right-0 select-none">
 			<div className="h-8 w-full flex flex-row items-center justify-between gap-0.5 p-10" data-tauri-drag-region>

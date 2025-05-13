@@ -1,11 +1,15 @@
+import Overlay from '@/components/ui/Overlay'
 import { createFileRoute } from '@tanstack/react-router'
 import { ChevronSelectorVerticalIcon } from '@untitled-theme/icons-react'
+import { useState } from 'react'
 
 export const Route = createFileRoute('/')({
   component: App,
 })
 
 function App() {
+  const [isVisible, setVisible] = useState(false)
+
   return (
     <>
       <div className="flex-1 flex flex-col justify-center px-16 z-10 relative [view-transition-name:main-content]">
@@ -19,14 +23,20 @@ function App() {
               <span className='text-xs'>Forge 1.8.9</span>
             </button>
 
-            <button className="px-3 hover:bg-fg-secondary-hover/20 py-3 hover:cursor-pointer rounded-md transition-colors">
+            <button onClick={() => setVisible(true)} className="px-3 focus:outline-none hover:bg-fg-secondary-hover/20 py-3 hover:cursor-pointer rounded-md transition-colors">
               <span className="text-lg text-component-bg"><ChevronSelectorVerticalIcon /></span>
             </button>
           </div>
         </div>
       </div>
 
-      <div className='z-10 bg-transparent w-full'>
+      <Overlay visible={isVisible} setVisible={setVisible}>
+        <div className="p-6">
+          <p>asdasdsadas</p>
+        </div>
+      </Overlay>
+
+      <div className='select-none z-10 bg-transparent w-full'>
         <p>still a demo layout not a final design</p>
       </div>
     </>
