@@ -99,7 +99,7 @@ To fix, run `pnpm webcommon build` and in the future you should use `pnpm webcom
 
 ### Translations
 
-Check out the [i18n README](apps/desktop/locales/README.md) for more information on how to contribute to translations.
+Please contact us in our [Discord server] if you are interested in providing translations.
 
 ### Credits
 
@@ -127,3 +127,4 @@ This CONTRIBUTING.md file was inspired by the [`github/docs` CONTRIBUTING.md] fi
 [suggested changes]: https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request
 [mark each conversation as resolved]: https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations
 [git tutorial]: https://lab.github.com/githubtraining/managing-merge-conflicts
+[Discord server]: https://discord.gg/polyfrost
