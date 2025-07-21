@@ -93,7 +93,9 @@ Also ensure that Rosetta is installed, as a few of our dependencies require it. 
 
 #### `Failed to resolve entry for package "@onelauncher/common"`
 
-You didn't build the components, to fix run `pnpm webcommon build` and in the future you should use `pnpm webcommon build --watch`
+This occurs when you haven't built the components used in the frontend for both oneclient and onelauncher.
+
+To fix, run `pnpm webcommon build` and in the future you should use `pnpm webcommon build --watch`
 
 ### Translations
 
