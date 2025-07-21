@@ -43,12 +43,14 @@ To make changes locally, follow these steps:
    2. For macOS users, run: `./packages/scripts/setup.sh`
       > The [Unix script] will check if Rust, pnpm and Xcode are installed and proceed to use Homebrew to install NASM, [Tauri essentials] and install any other required dependencies for OneLauncher to build.
    3. For Windows users, run in PowerShell: `.\packages\scripts\setup.ps1`
-      > The [Unix script] will install pnpm, LLVM, C++ build tools, NASM, Rust + Cargo, Rust tools, Edge Webview 2, [Tauri essentials] and any other required dependencies for OneLauncher to build.
+      > The [Windows script] will install pnpm, LLVM, C++ build tools, NASM, Rust + Cargo, Rust tools, Edge Webview 2, [Tauri essentials] and any other required dependencies for OneLauncher to build.
 4. Install dependencies: `pnpm i`
 5. Prepare your cargo installation: `pnpm prep`
 
 ### Running
 The most common scripts you will use are:
+
+- `pnpm web_common build --watch` - Builds the components used across both apps and watches for changes.
 
 - `pnpm onelauncher:desktop dev` - Runs the **OneLauncher** desktop application with watch mode enabled and starts up the frontend's vite dev server.
 
@@ -56,7 +58,7 @@ The most common scripts you will use are:
 
 If necessary, the webview devtools can be opened by pressing `Ctrl + Shift + I` (Linux and Windows) or `Command + Option + I` (macOS) in the desktop app.
 
-After cleaning out your build artifacts using `pnpm clean`, `git clean`, or `cargo clean`, it is necessary to re-run the `setup` script.
+After cleaning out your build artifacts using `git clean`, or `cargo clean`, it is necessary to re-run the `setup` script.
 
 After you finish making your changes and committed them to your branch, make sure to execute `pnpm format` to fix any style inconsistency in your code.
 
@@ -88,6 +90,10 @@ Run `xcode-select --install` in the terminal to install the command line tools. 
 If that doesn't work, ensure that macOS is fully updated, and that you have Xcode installed (via the app store).
 
 Also ensure that Rosetta is installed, as a few of our dependencies require it. You can install Rosetta with `softwareupdate --install-rosetta --agree-to-license`.
+
+#### `Failed to resolve entry for package "@onelauncher/common"`
+
+You didn't build the components, to fix run `pnpm webcommon build` and in the future you should use `pnpm webcommon build --watch`
 
 ### Translations
 
